@@ -1,9 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -27,22 +26,31 @@ export default class Home extends React.Component {
   renderTable() {
     const { books } = this.state;
     return (
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover size="sm mt-5">
         <thead>
           <tr>
-            <th>Nome</th>
+            <th>Imagem</th>
+            <th>Título</th>
             <th>Ano</th>
+            <th>ISBN 13</th>
             <th>Dono</th>
-            <th>Descrição</th>
+            <th>Dísponivel</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           { books.map(book => (
             <tr key={book.id}>
+              <td>{book.id}</td>
               <td>{book.nome}</td>
               <td>{book.ano}</td>
+              <td>{book.isbn13}</td>
               <td>{book.dono}</td>
-              <td>{book.descricao}</td>
+              <td>{book.disponovel}</td>
+              <td>
+                <Button variant="link">Detalhes</Button>
+                <Button variant="link">Emprestar</Button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -55,31 +63,20 @@ export default class Home extends React.Component {
     const haveResults = books.length > 0;
 
     return (
-      <div>
-        Buscar itens no acervo
+      <div className="col-12 mt-5">
+        <h3 className="text-center">Buscar itens no acervo</h3>
+        <Form>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Control type="text" placeholder="Entre com algum valor" />
+            <Form.Text className="text-muted">
+                Voce pode informar nome, autor e tags
+            </Form.Text>
+          </Form.Group>
+          <Button variant="primary" onClick={this.loadBooks}>Pesquisar</Button>
 
-        <InputGroup>
-          <label htmlFor="titulo">Título ou Autor</label>
-          <FormControl
-            id="titulo"
-            placeholder="Título ou Autor"
-            aria-label="Título ou Autor"
-          />
-        </InputGroup>
+        </Form>
 
-        <label htmlFor="tags">Palavra-chave (tags)</label>
-        <InputGroup>
-          <FormControl
-            id="tags"
-            placeholder="Palavra-chave (tags)"
-            aria-label="Palavra-chave (tags)"
-          />
-        </InputGroup>
-
-        <Button variant="primary" onClick={this.loadBooks}>Primary</Button>
-
-        { haveResults ? this.renderTable() : 'Sem registros.' }
-
+        { haveResults ? this.renderTable() : <div className="row mt-5">Sem registros.</div> }
       </div>
     );
   }
