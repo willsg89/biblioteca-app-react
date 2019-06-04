@@ -45,6 +45,7 @@ function App() {
             <Route path="/adicionar" component={Adicionar} />
             <Route path="/reservas" component={Reservas} />
             <Route path="/emprestimos" component={Emprestimos} />
+            <Route path="/ver/:id" component={Adicionar} />
           </Switch>
         </Row>
       </Container>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
+import { LinkContainer } from 'react-router-bootstrap';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -48,7 +49,9 @@ export default class Home extends React.Component {
               <td>{book.dono}</td>
               <td>{book.disponovel}</td>
               <td>
-                <Button variant="link">Detalhes</Button>
+                <LinkContainer to={`/ver/${book.id}`}>
+                  <Button variant="link">Detalhes</Button>
+                </LinkContainer>
                 <Button variant="link">Emprestar</Button>
               </td>
             </tr>
@@ -67,12 +70,16 @@ export default class Home extends React.Component {
         <h3 className="text-center">Buscar itens no acervo</h3>
         <Form>
           <Form.Group controlId="formBasicEmail">
-            <Form.Control type="text" placeholder="Entre com algum valor" />
-            <Form.Text className="text-muted">
+            <div>
+              <Form.Control type="text" placeholder="Entre com algum valor" />
+              <Form.Text className="text-muted">
                 Voce pode informar nome, autor e tags
-            </Form.Text>
+              </Form.Text>
+            </div>
           </Form.Group>
-          <Button variant="primary" onClick={this.loadBooks}>Pesquisar</Button>
+          <div className="text-center">
+            <Button variant="primary" className="col-8 col-sm-6 col-md-4 col-lg-3" onClick={this.loadBooks}>Pesquisar</Button>
+          </div>
 
         </Form>
 
