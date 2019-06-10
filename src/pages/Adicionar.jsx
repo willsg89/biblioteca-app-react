@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import FormComponent from '../components/FormComponent';
 
 export default class Adicionar extends React.Component {
   constructor(props) {
@@ -52,71 +53,58 @@ export default class Adicionar extends React.Component {
     // const isEdit = this.getId();
     // {this.props.match.path}
     return (
-      <div className="container mt-5">
-        <h3 className="text-center">Cadastrar item</h3>
-        <Form className="mt-5">
-          <Form.Group controlId="formName">
-            <Form.Label>Nome:</Form.Label>
-            <Form.Control
-              // disabled={isEdit ? 'disabled' : null}
-              value={book.nome}
-              onChange={event => this.handleChange({ nome: event.target.value })}
-              size="sm"
-              type="text"
-              placeholder="Informe o nome:"
-            />
-          </Form.Group>
+      <div className="container mt-5 d-flex flex-column">
+        <h3 className="align-self-center">Cadastrar item</h3>
+        <Form className="mt-5 col-12 col-md-8 col-lg-6 align-self-center">
+          <FormComponent
+            id="formName"
+            label="Nome:"
+            placeholder="Informe o nome"
+            value={book.nome}
+            onChange={event => this.handleChange({ nome: event.target.value })}
+          />
 
-          <Form.Group controlId="formYear">
-            <Form.Label>Ano</Form.Label>
-            <Form.Control
-              value={book.ano}
-              onChange={event => this.handleChange({ ano: event.target.value })}
-              size="sm"
-              type="number"
-              placeholder="Informe o ano"
-            />
-          </Form.Group>
+          <FormComponent
+            id="formYear"
+            label="Ano:"
+            placeholder="Informe o ano"
+            value={book.ano}
+            type="number"
+            onChange={event => this.handleChange({ ano: event.target.value })}
+          />
 
-          <Form.Group controlId="formOwner">
-            <Form.Label>Dono</Form.Label>
-            <Form.Control
-              value={book.dono}
-              onChange={event => this.handleChange({ dono: event.target.value })}
-              size="sm"
-              type="text"
-              placeholder="Informe o dono"
-            />
-          </Form.Group>
+          <FormComponent
+            id="formOwner"
+            label="Dono:"
+            placeholder="Informe o dono"
+            value={book.dono}
+            onChange={event => this.handleChange({ dono: event.target.value })}
+          />
 
-          <Form.Group controlId="formDescription">
-            <Form.Label>Descrição</Form.Label>
-            <Form.Control
-              value={book.descricao}
-              onChange={event => this.handleChange({ descricao: event.target.value })}
-              size="sm"
-              as="textarea"
-              rows="3"
-              placeholder="Informe a descrição"
-            />
-          </Form.Group>
+          <FormComponent
+            id="formDescription"
+            label="Descrição:"
+            placeholder="Informe o descrição"
+            value={book.descricao}
+            as="textarea"
+            onChange={event => this.handleChange({ descricao: event.target.value })}
+            rows="3"
+          />
 
-          <Form.Group controlId="formType">
-            <Form.Label>Tipo</Form.Label>
-            <Form.Control
-              value={book.tipo}
-              onChange={event => this.handleChange({ tipo: event.target.value })}
-              size="sm"
-              as="select"
-              placeholder="Informe o tipo"
-            >
-              <option value="livro">Livro</option>
-              <option value="dvd">DVD</option>
-              <option value="revista">Revista</option>
-              <option value="periodico">Periódico</option>
-              <option value="outros">Outros</option>
-            </Form.Control>
-          </Form.Group>
+          <FormComponent
+            id="formType"
+            label="Tipo:"
+            placeholder="Informe o tipo"
+            value={book.tipo}
+            as="select"
+            onChange={event => this.handleChange({ tipo: event.target.value })}
+          >
+            <option value="livro">Livro</option>
+            <option value="dvd">DVD</option>
+            <option value="revista">Revista</option>
+            <option value="periodico">Periódico</option>
+            <option value="outros">Outros</option>
+          </FormComponent>
 
           <Button variant="primary" type="submit">
             Incluir
